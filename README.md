@@ -9,7 +9,7 @@ This BASIC understands a few statements and all variables there are 16 or 32-bit
 The grammer is also very simple and can be described in ABNF just in a few lines:
 
 
-CR  _stands for Crarret Return (`\n\r` or `\n`, depends on OS)
+CR  _stands for Carret Return (`\r\n` or `\n`, depends on OS)_
 
 __empty__ _stands for nothing._
 
