@@ -45,11 +45,17 @@ __expression-list__ ::= (__expression__ | __string__) (_,_ __expression__ | __st
 __ralational-operator__ ::= (_<_ (_>_ | _=_ | __empty__)) | (_>_ (_<_ | _=_ | __empty__)) | _=_
 
 __statement__ ::= _PRINT_ __expression-list__
+
                   | _INPUT_ __var-list__
+                  
                   | _LET_ __var__ _=_ __expression__
+                  
                   | _GOTO_ __expression__
+                  
                   | _GOSUB_ __expression__
+                  
                   | _RETURN_
+                  
                   | _IF_ __expression__ __relational-operator__ _THEN_ __statement__
 
 __line__  ::= (__number__ __statement__) | (__statement__) CR
