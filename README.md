@@ -24,7 +24,7 @@ __lowercase__ ::= _a_ | _b_ | _c_ ... _x_ | _y_ | _z_
 
 __uppercase__ ::= _A_ | _B_ | _C_ ... _X_ | _Y_ | _Z_
 
-__letter__  ::= __lowercase__ | __uppercase
+__letter__  ::= __lowercase__ | __uppercase__
 
 __number__  ::= __digit__ (__digit__)*
 
