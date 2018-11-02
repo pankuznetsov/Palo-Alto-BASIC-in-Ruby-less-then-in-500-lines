@@ -273,7 +273,12 @@ end
 def exec_goto
 	$base += 4
 	skip_trash
-	$line_no = exec_expr
+	gl = exec_expr
+	if gl.in?($lines) then
+		$line_no = gl
+	else
+		raise 'No such line'
+	end
 end
 
 def exec_if
@@ -282,6 +287,9 @@ def exec_if
 	r1 = exec_expr
 	skip_trash
 	op = get_relop
+	if op == nil then
+		return 'Relational operator expected'
+	end
 	skip_trash
 	r2 = exec_expr
 	skip_trash
@@ -316,7 +324,12 @@ def exec_gosub
 	$base += 5
 	$return_stack << $line_no
 	skip_trash
-	$line_no = exec_expr
+	gl = exec_expr
+	if gl.in?($lines) then
+		$line_no = gl
+	else
+		raise 'No such line'
+	end
 end
 
 def exec_return
@@ -324,6 +337,8 @@ def exec_return
 	$line_no = $return_stack.last + 1
 	if $return_stack.size > 0 then
 		$return_stack.drop($return_stack.size - 1)
+	else
+		return 'Trying to RETURN, but stack size is 0'
 	end
 end
 
@@ -344,6 +359,8 @@ def exec_statement
 		exec_return
 	elsif substring_at_place($base, "END", true)
 		$run = false
+	else
+		raise 'Line does not contains valid statement'
 	end
 	$base = 0
 end
