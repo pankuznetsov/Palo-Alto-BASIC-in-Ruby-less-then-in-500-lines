@@ -6,7 +6,7 @@ This BASIC understands a few statements and all variables there are 16 or 32-bit
 
 [Take a look on Wikipedia page](https://en.wikipedia.org/wiki/Tiny_BASIC).
 
-The grammer is also very simple and can be described in ABNF just in a few lines:
+The grammer is also pretty simple and can be described in ABNF just in a few lines:
 
 
 CR  _stands for Carret Return (`\r\n` or `\n`, depends on OS)_
@@ -54,3 +54,6 @@ __statement__ ::= _PRINT_ __expression-list__
                   | _END_
 
 __line__  ::= ((__number__ __statement__) | (__statement__)) CR
+
+
+To run the programm just download _paloaltobasic.rb_ and run it using `ruby paloaltobasic.rb`
