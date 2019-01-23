@@ -1,5 +1,5 @@
 # PaloAlto BASIC in Ruby less then in 500 lines
-PaloAlto BASIC (also known as Tiny BASIC) interpreter less than in 500 lines.
+__PaloAlto BASIC__ (also known as __Tiny BASIC__) interpreter less than in 500 lines writen in Ruby.
 The original program takes only 3KB or ROM and runs on Intel 8080, Motorola 6800 and MOS Technology 6502 processors.
 
 This BASIC understands a few statements and all variables there are 16 or 32-bit integers.
