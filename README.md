@@ -56,4 +56,6 @@ __statement__ ::= _PRINT_ __expression-list__
 __line__  ::= ((__number__ __statement__) | (__statement__)) CR
 
 
-To run the programm just download _paloaltobasic.rb_ and run it using `ruby paloaltobasic.rb`
+
+To __run the programm__ just download _paloaltobasic.rb_ and run it using `ruby paloaltobasic.rb`.
+Contact me via e-mail `pankuznetsov@gmail.com`.
