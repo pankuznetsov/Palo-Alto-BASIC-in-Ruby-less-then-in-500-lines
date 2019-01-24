@@ -1,7 +1,7 @@
 $code = ''
 $line_no = 1
 $base = 0
-$vars = { 'A' => 0, 'B' => 0, 'C' => 0, 'D' => 0, 'E' => 0, 'F' => 0 }
+$vars = { }
 $lines = { }
 $return_stack = [ ]
 $run = true
@@ -274,7 +274,7 @@ def exec_goto
 	$base += 4
 	skip_trash
 	gl = exec_expr
-	if gl.in?($lines) then
+	if $lines.include?(gl.to_i) then
 		$line_no = gl
 	else
 		raise 'No such line'
@@ -409,7 +409,7 @@ def repl
 end
 
 def enterance
-	puts 'PaloAlto BASIC interpreter made by Kuznetsov S. A., 2018'
+	puts 'PaloAlto BASIC interpreter made by Kuznetsov S. A., 2019'
 	repl
 end
 
