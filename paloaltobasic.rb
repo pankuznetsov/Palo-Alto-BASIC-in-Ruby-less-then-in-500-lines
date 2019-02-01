@@ -1,8 +1,8 @@
 $code = ''
-$line_no = 1
+$line_no = 0
 $base = 0
 $vars = { }
-$lines = { }
+$lines = [ ]
 $return_stack = [ ]
 $run = true
 
@@ -87,6 +87,7 @@ def get_var_list
 	vrs = []
 	if letter?(peek(0)) and peek(0).upcase == peek(0) then
 		vrs << peek(0)
+		$base += 1
 	end
 	skip_trash
 	while peek(0) == ',' do
@@ -94,6 +95,7 @@ def get_var_list
 		skip_trash
 		if letter?(peek(0)) and peek(0).upcase == peek(0) then
 			vrs << peek(0)
+			$base += 1
 		end
 		skip_trash
 	end
@@ -237,17 +239,18 @@ def exec_print
 		print ress[i]
 	end
 	puts
-	$line_no = $lines.keys[$lines.keys.find_index($line_no) + 1]
+	$line_no += 1
 end
 
 def exec_input
 	$base += 5
 	skip_trash
 	vrs = get_var_list
+	puts vrs.size
 	for i in 0...vrs.size
 		$vars[vrs[i]] = gets.chomp.to_i
 	end
-	$line_no = $lines.keys[$lines.keys.find_index($line_no) + 1]
+	$line_no += 1
 end
 
 def exec_let
@@ -267,14 +270,14 @@ def exec_let
 	else
 		raise 'Variable expected'
 	end
-	$line_no = $lines.keys[$lines.keys.find_index($line_no) + 1]
+	$line_no += 1
 end
 
 def exec_goto
 	$base += 4
 	skip_trash
-	gl = exec_expr
-	if $lines.include?(gl.to_i) then
+	gl = exec_expr.to_i / 10 - 1
+	if gl < $lines.size then
 		$line_no = gl
 	else
 		raise 'No such line'
@@ -287,30 +290,22 @@ def exec_if
 	r1 = exec_expr
 	skip_trash
 	op = get_relop
-	if op == nil then
-		return 'Relational operator expected'
-	end
+	if op == nil then return 'Relational operator expected' end
 	skip_trash
 	r2 = exec_expr
 	skip_trash
 	if substring_at_place($base, "THEN", true) then
 		$base += 4
 		skip_trash
-		if op == :LS_OR_GR and r1 != r2 then
-			exec_statement
-		elsif op == :LS_OR_EQ and r1 <= r2 then
-			exec_statement
-		elsif op == :LS and r1 < r2 then
-			exec_statement
-		elsif op == :GR and r1 > r2 then
-			exec_statement
-		elsif op == :GR_OR_EQ and r1 >= r2 then
-			exec_statement
-		elsif op == :EQ and r1 == r2 then
-			exec_statement
+		if op == :LS_OR_GR and r1 != r2 then exec_statement
+		elsif op == :LS_OR_EQ and r1 <= r2 then exec_statement
+		elsif op == :LS and r1 < r2 then exec_statement
+		elsif op == :GR and r1 > r2 then exec_statement
+		elsif op == :GR_OR_EQ and r1 >= r2 then exec_statement
+		elsif op == :EQ and r1 == r2 then exec_statement
 		else
-			if $lines.keys.find_index($line_no) != nil then
-				$line_no = $lines.keys[$lines.keys.find_index($line_no) + 1]
+			if $line_no < $lines.size then
+				$line_no += 1
 			else
 				$run = false
 			end
@@ -322,10 +317,10 @@ end
 
 def exec_gosub
 	$base += 5
-	$return_stack << $line_no
 	skip_trash
-	gl = exec_expr
-	if gl.in?($lines) then
+	gl = exec_expr.to_i / 10 - 1
+	if gl < $lines.size then
+		$return_stack << $line_no
 		$line_no = gl
 	else
 		raise 'No such line'
@@ -338,25 +333,18 @@ def exec_return
 	if $return_stack.size > 0 then
 		$return_stack.drop($return_stack.size - 1)
 	else
-		return 'Trying to RETURN, but stack size is 0'
+		return 'Trying to RETURN, but stack is empty'
 	end
 end
 
 def exec_statement
-	if substring_at_place($base, "PRINT", true) then
-		exec_print
-	elsif substring_at_place($base, "LET", true)
-		exec_let
-	elsif substring_at_place($base, "INPUT", true)
-		exec_input
-	elsif substring_at_place($base, "GOTO", true)
-		exec_goto
-	elsif substring_at_place($base, "IF", true)
-		exec_if
-	elsif substring_at_place($base, "GOSUB", true)
-		exec_gosub
-	elsif substring_at_place($base, "RETURN", true)
-		exec_return
+	if substring_at_place($base, "PRINT", true) then exec_print
+	elsif substring_at_place($base, "LET", true) exec_let
+	elsif substring_at_place($base, "INPUT", true) exec_input
+	elsif substring_at_place($base, "GOTO", true) exec_goto
+	elsif substring_at_place($base, "IF", true) exec_if
+	elsif substring_at_place($base, "GOSUB", true) exec_gosub
+	elsif substring_at_place($base, "RETURN", true) exec_return
 	elsif substring_at_place($base, "END", true)
 		$run = false
 	else
@@ -370,20 +358,13 @@ def exec_prog(prog)
 	pl = 0
 	for i in 0...ls.size
 		$code = ls[i]
-		if numeric?(ls[i][0]) then
-			n = parse_number
-			pl = n
-			skip_trash
-			$lines[n] = $code[$base, $code.size]
-		else
-			$lines[pl + 1] = $code[0, $code.size]
-			pl += 1
-		end
-		$base = 0
+		$lines[pl] = $code[0, $code.size]
+		pl += 1
 	end
-	$line_no = $lines.keys[0]
-	last = $lines.keys.max { |a, b| a <=> b }
-	while $line_no != nil and $line_no <= last
+	$base = 0
+	$line_no = 0
+	last = $lines.size
+	while $line_no != nil and $line_no < last
 		if $run == true then
 			$code = $lines[$line_no]
 			skip_trash
@@ -397,13 +378,16 @@ end
 def repl
 	in_str = ''
 	prog = ''
+	n = 0
 	while true do
+		print (n + 1) * 10, "\t"
 		in_str = gets.chomp
 		if in_str != 'RUN' then
 			prog += in_str + "\n"
 		else
 			break
 		end
+		n += 1
 	end
 	exec_prog(prog)
 end
