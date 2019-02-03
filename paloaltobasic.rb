@@ -1,10 +1,10 @@
-$code = ''
-$line_no = 0
+$code = ''		# Line for execution
+$line_no = 0	# Line number
 $base = 0
-$vars = { }
-$lines = [ ]
-$return_stack = [ ]
-$run = true
+$vars = { }		# Variables hash table
+$lines = [ ]	# Lines of program
+$return_stack = [ ]	# Call stack
+$run = true		# False if END
 
 def peek(oft)
 	if oft < 0 or oft >= $code.size then return nil end
@@ -19,7 +19,7 @@ def numeric?(symb)
 	return symb.match?(/[[0-9\.!#\-]]/)
 end
 
-def skip_trash
+def skip_trash # Function skipping whitespaces.
 	i = 0
 	while $base + i < $code.size and peek(i).match?(/\s/) do
 		i += 1
@@ -28,7 +28,7 @@ def skip_trash
 	return i
 end
 
-def skip_to_newline
+def skip_to_newline # Call it when the rest of line makes no sense
 	i = 0
 	while $base + i < $code.size and peek(i) != "\n" do
 		i += 1
@@ -37,7 +37,7 @@ def skip_to_newline
 	return i
 end
 
-def substring_at_place(idx, substr, ignore_case)
+def substring_at_place(idx, substr, ignore_case) # Checks for string in certan place
 	if !ignore_case
 		return $code[idx..(idx + substr.size - 1)] == substr
 	else
@@ -45,7 +45,7 @@ def substring_at_place(idx, substr, ignore_case)
 	end
 end
 
-def parse_number
+def parse_number # Function for parsing integer
 	n = ''
 	i = 0
 	while $base + i < $code.size and numeric?(peek(i)) 
@@ -57,7 +57,7 @@ def parse_number
 	return n.to_i
 end
 
-def parse_string
+def parse_string # Returns string content between double quotes
 	i = 1
 	str = ''
 	while $base + i < $code.size and peek(i) != '"' do
@@ -73,7 +73,7 @@ def parse_string
 	return str
 end
 
-def get_var
+def get_var # Parsing veriable
 	if letter?(peek(0)) and peek(0).upcase == peek(0) then
 		v = $vars[peek(0)].to_i
 		$base += 1
@@ -83,7 +83,7 @@ def get_var
 	end
 end
 
-def get_var_list
+def get_var_list # Parsing list of variables
 	vrs = []
 	if letter?(peek(0)) and peek(0).upcase == peek(0) then
 		vrs << peek(0)
@@ -102,7 +102,7 @@ def get_var_list
 	return vrs
 end
 
-def get_relop
+def get_relop # This pice of code works for determinating relation between expressions in IF block
 	if peek(0) == '<' then
 		if peek(1) == '>' then
 			$base += 2
@@ -151,7 +151,7 @@ def exec_factor
 	return nil
 end
 
-def exec_term
+def exec_term # Multiplication and division in expressions
 	sum = exec_factor
 	skip_trash
 	while peek(0) == '/' or peek(0) == '*' do
@@ -169,7 +169,7 @@ def exec_term
 	return sum
 end
 
-def exec_expr
+def exec_expr # Addition and substraction in expressions
 	pst = false
 	ngt = false
 	if peek(0) == '-' then
@@ -375,7 +375,7 @@ def exec_prog(prog)
 	end
 end
 
-def repl
+def repl # Read Eval Print Loop
 	in_str = ''
 	prog = ''
 	n = 0
