@@ -14,7 +14,7 @@ __Input staement__: `INPUT A`, or you can use list of variables: `INPUT A, B, C`
 
 __Variable defenition/assigment__: `LET A = 10`, `LET B = (2 + 6) * 4` or `LET C = (A * B) + (B / A) - 1`
 
-__Goto__: `10 GOTO 10` is endless cycle.
+__Goto__: `10 GOTO 10` is endless cycle. `GOTO A * 10 + 230` is also possible.
 
 __If__: `IF A = B THEN PRINT "EQUALITY"`, `IF A > B * 2 THEN LET C = C + (B - A)` or `IF A <> B THEN PRINT "UNEQUALITY"`
 
