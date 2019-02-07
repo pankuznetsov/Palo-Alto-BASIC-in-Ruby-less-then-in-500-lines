@@ -16,7 +16,9 @@ _Input staement_: `INPUT A`, or you can use list of variables: `INPUT A, B, C`
 _Variable defenition/assigment_: `LET A = 10`, `LET B = (2 + 6) * 4` or `LET C = (A * B) + (B / A) - 1`
 
 _Goto_:
+
 `10 INPUT A
+
 20 GOTO 10`
 
 
