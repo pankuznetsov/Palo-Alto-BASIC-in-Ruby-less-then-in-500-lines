@@ -8,14 +8,17 @@ This BASIC understands a few statements and all variables there are 16 or 32-bit
 
 # Just take a look on some __code examples__
 
+__Print statement__: `PRINT "HELLO WORLD"`, `PRINT A` or `PRINT "X: ", X, ", Y: ", Y, ", Z: ", Z`
 
-_Print statement_: `PRINT "HELLO WORLD"`, `PRINT A` or `PRINT "X: ", X, ", Y: ", Y, ", Z: ", Z`
+__Input staement__: `INPUT A`, or you can use list of variables: `INPUT A, B, C`
 
-_Input staement_: `INPUT A`, or you can use list of variables: `INPUT A, B, C`
+__Variable defenition/assigment__: `LET A = 10`, `LET B = (2 + 6) * 4` or `LET C = (A * B) + (B / A) - 1`
 
-_Variable defenition/assigment_: `LET A = 10`, `LET B = (2 + 6) * 4` or `LET C = (A * B) + (B / A) - 1`
+__Goto__: `10 GOTO 10` is endless cycle.
 
-_Goto_: `10 GOTO 10` is endless cycle.
+__IF__: `IF A = B THEN PRINT "EQUALITY"`, `IF A > B * 2 THEN LET C = C + (B - A)` or `IF A <> B THEN PRINT "UNEQUALITY"`
+
+__GOSUB__: `10  IF A = 1 THEN GOSUB 50` ... `50  LET X = X * X` ... `60  RETURN`
 
 
 # EBNF Grammer
