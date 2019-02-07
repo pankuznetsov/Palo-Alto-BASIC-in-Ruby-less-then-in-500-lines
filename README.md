@@ -17,9 +17,9 @@ _Variable defenition/assigment_: `LET A = 10`, `LET B = (2 + 6) * 4` or `LET C =
 
 _Goto_:
 
-`10 INPUT A
+`10 INPUT A`
 
-20 GOTO 10`
+`20 GOTO 10`
 
 
 # EBNF Grammer
