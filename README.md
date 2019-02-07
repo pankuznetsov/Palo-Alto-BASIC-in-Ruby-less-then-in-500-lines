@@ -6,6 +6,12 @@ This BASIC understands a few statements and all variables there are 16 or 32-bit
 
 [Take a look on Wikipedia page](https://en.wikipedia.org/wiki/Tiny_BASIC).
 
+# Take a look on some __code examples__:
+
+
+_Hello World_: `PRINT "HELLO WORLD"`
+
+
 The grammer is also pretty simple and can be described in ABNF just in a few lines:
 
 
