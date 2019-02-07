@@ -9,12 +9,14 @@ This BASIC understands a few statements and all variables there are 16 or 32-bit
 # Just take a look on some __code examples__
 
 
-_Hello World_: `PRINT "HELLO WORLD"`
+_Print statement_: `PRINT "HELLO WORLD"`, `PRINT A` or `PRINT "X: ", X, ", Y: ", Y, ", Z: ", Z`
+
+_Input staement_: `INPUT A`, or you can use list of variables: `INPUT A, B, C`
 
 
 # EBNF Grammer
 
-The grammer is also pretty simple and can be described in ABNF just in a few lines:
+The grammer is also pretty simple and can be described in EBNF just in a few lines:
 
 
 CR  _stands for Carret Return (`\r\n` or `\n`, depends on OS)_
