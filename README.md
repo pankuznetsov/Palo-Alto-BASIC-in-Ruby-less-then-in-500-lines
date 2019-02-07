@@ -18,7 +18,7 @@ __Goto__: `10 GOTO 10` is endless cycle.
 
 __IF__: `IF A = B THEN PRINT "EQUALITY"`, `IF A > B * 2 THEN LET C = C + (B - A)` or `IF A <> B THEN PRINT "UNEQUALITY"`
 
-__GOSUB__: `10  IF A = 1 THEN GOSUB 50` ... `50  LET X = X * X` ... `60  RETURN`
+__GoSub__: `10  IF A = 1 THEN GOSUB 50` ... `50  LET X = X * X` ... `60  RETURN`
 
 
 # EBNF Grammer
