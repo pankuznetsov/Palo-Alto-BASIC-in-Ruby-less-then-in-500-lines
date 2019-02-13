@@ -339,13 +339,13 @@ end
 
 def exec_statement
 	if substring_at_place($base, "PRINT", true) then exec_print
-	elsif substring_at_place($base, "LET", true) exec_let
-	elsif substring_at_place($base, "INPUT", true) exec_input
-	elsif substring_at_place($base, "GOTO", true) exec_goto
-	elsif substring_at_place($base, "IF", true) exec_if
-	elsif substring_at_place($base, "GOSUB", true) exec_gosub
-	elsif substring_at_place($base, "RETURN", true) exec_return
-	elsif substring_at_place($base, "END", true)
+	elsif substring_at_place($base, "LET", true) then exec_let
+	elsif substring_at_place($base, "INPUT", true) then exec_input
+	elsif substring_at_place($base, "GOTO", true) then exec_goto
+	elsif substring_at_place($base, "IF", true) then exec_if
+	elsif substring_at_place($base, "GOSUB", true) then exec_gosub
+	elsif substring_at_place($base, "RETURN", true) then exec_return
+	elsif substring_at_place($base, "END", true) then
 		$run = false
 	else
 		raise 'Line does not contains valid statement'
