@@ -238,7 +238,6 @@ def exec_print
 	for i in 0...ress.size
 		print ress[i]
 	end
-	puts
 	$line_no += 1
 end
 
@@ -246,7 +245,6 @@ def exec_input
 	$base += 5
 	skip_trash
 	vrs = get_var_list
-	puts vrs.size
 	for i in 0...vrs.size
 		$vars[vrs[i]] = gets.chomp.to_i
 	end
