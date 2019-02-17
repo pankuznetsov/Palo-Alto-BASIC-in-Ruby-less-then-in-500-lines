@@ -23,7 +23,7 @@ __GoSub__: `10  IF A = 1 THEN GOSUB 50` ... `50  LET X = X * X` ... `60  RETURN`
 
 # EBNF Grammer
 
-The grammer is also pretty simple and can be described in EBNF just in a few lines:
+The grammer is also pretty simple and can be described in EBNF just in a very few lines:
 
 
 CR  _stands for Carret Return (`\r\n` or `\n`, depends on OS)_
