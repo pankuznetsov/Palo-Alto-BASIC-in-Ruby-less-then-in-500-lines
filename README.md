@@ -80,4 +80,5 @@ To __run the programm__ just download _paloaltobasic.rb_ and run it using `ruby 
 
 Contact me via e-mail `pankuznetsov@gmail.com`.
 
-<meta name="google-site-verification" content="P4TUfxie28FU8ZPz2Bc9xpfTe8du_PlePFOex1LL-dM" />
+Google indexing: 
+`<meta name="google-site-verification" content="P4TUfxie28FU8ZPz2Bc9xpfTe8du_PlePFOex1LL-dM" />`
