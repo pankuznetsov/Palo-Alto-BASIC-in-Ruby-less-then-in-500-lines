@@ -1,6 +1,6 @@
 $code = ''		# Line for execution
 $line_no = 0	# Line number
-$base = 0
+$base = 0			# Points first non-parsed symbol
 $vars = { }		# Variables hash table
 $lines = [ ]	# Lines of program
 $return_stack = [ ]	# Call stack
