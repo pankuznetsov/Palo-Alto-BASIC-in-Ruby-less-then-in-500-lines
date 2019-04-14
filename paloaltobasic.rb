@@ -387,7 +387,7 @@ def repl # Read Eval Print Loop
 		end
 		n += 1
 	end
-  puts '----------------'
+	puts '----------------'
 	exec_prog(prog)
 end
 
