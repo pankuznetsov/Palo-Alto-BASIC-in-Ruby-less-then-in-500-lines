@@ -80,4 +80,8 @@ __line__  ::= ((__number__ __statement__) | (__statement__)) CR
 
 To __run the programm__ just download _paloaltobasic.rb_ and run it using `ruby paloaltobasic.rb`. Program works stable on Ruby version __2.6__.
 
+
+---
+
+
 Contact me via e-mail `kuznetsovsa_user@protonmail.com`.
