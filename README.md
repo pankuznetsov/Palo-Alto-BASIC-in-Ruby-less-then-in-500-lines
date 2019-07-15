@@ -69,7 +69,7 @@ __statement__ ::= (_PRINT_ __expression-list__)
                   | (_GOTO_ __expression__)
                   | (_GOSUB_ __expression__)
                   | (_RETURN_)
-                  | (_IF_ __expression__ __relational-operator__ _THEN_ __statement__)
+                  | (_IF_ __expression__ __relational-operator__ __expression__ _THEN_ __statement__)
                   | (_END_)
 
 __line__  ::= ((__number__ __statement__) | (__statement__)) CR
