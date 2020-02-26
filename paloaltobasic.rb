@@ -7,9 +7,7 @@ $return_stack = [ ]	# Call stack
 $run = true		# False if END
 
 def peek(oft)
-	if $base + oft < 0 or $base + oft >= $code.size then
-		raise 'peek: Argument is out of bounds'
-	end
+	if oft < 0 or oft >= $code.size then return nil end
 	return $code[$base + oft]
 end
 
